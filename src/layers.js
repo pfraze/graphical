@@ -57,8 +57,10 @@ function addChild(child) {
 }
 
 function draw(ctx) {
+  this.ctx.save()
   if (this.childs.length) {
     for (var i =0; i < this.childs.length; i++)
       this.childs[i].draw(this.ctx)
   }
+  this.ctx.restore()
 }

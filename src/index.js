@@ -8,8 +8,8 @@ var pos = require('./positioning')
 var CANVAS_WIDTH = window.innerWidth
 var CANVAS_HEIGHT = window.innerHeight
 
-var layer1 = layers.create({ width: CANVAS_WIDTH, height: CANVAS_HEIGHT })
-layer1.addChild(panel({ x: 15, y: pos.fromBottom(50), width: pos.fromRight(30), height: 50, background: '#ccc', childs: [
+var uiLayer = layers.create({ width: CANVAS_WIDTH, height: CANVAS_HEIGHT })
+uiLayer.addChild(panel({ x: 15, y: pos.fromBottom(50), width: pos.fromRight(30), height: 50, background: '#ccc', childs: [
   panel({ x: 20, width: pos.fromRight(40), height: 40, childs: [
     button({ x: 0,   width: 120, height: 40, background: 'gray', hover: '#aaa', pressed: '#555', childs: [label({ x: 5, text: 'hello world', baseline: 'bottom' })] }),
     button({ x: 140, width: 120, height: 40, background: 'gray', hover: '#aaa', pressed: '#555', childs: [label({ x: 5, text: 'hello world 2', baseline: 'bottom' })] }),
@@ -17,10 +17,7 @@ layer1.addChild(panel({ x: 15, y: pos.fromBottom(50), width: pos.fromRight(30), 
 ]}))
 
 function draw() {
-  layer1.ctx.save()
-  layer1.draw()
-  layer1.ctx.restore()
-
+  uiLayer.draw()
   window.requestAnimationFrame(draw)
 }
 draw()
