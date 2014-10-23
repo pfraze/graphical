@@ -5,10 +5,11 @@ var CANVAS_WIDTH = window.innerWidth
 var CANVAS_HEIGHT = window.innerHeight
 
 var panel = require('./com/panel')
+var button = require('./com/button')
+var label = require('./com/label')
 var layer1 = layers.create({ width: CANVAS_WIDTH, height: CANVAS_HEIGHT })
 layer1.addChild(panel({ height: layer1.height / 4, sticky: 'bottom', background: '#ccc', childs: [
-  panel({ width: layer1.width / 4, sticky: 'left', background: 'red' }),
-  panel({ width: layer1.width / 4, sticky: 'right', background: 'red' }),
+  button({ sticky: 'left', width: 300, background: 'red', hoverBackground: 'blue', childs: [label({ text: 'hello world' })] })
 ]}))
 
 function draw() {

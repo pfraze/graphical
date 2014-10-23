@@ -1,23 +1,25 @@
 module.exports = function(opts) {
   opts = opts || {}
   var panel = {
-    x:          opts.x || 0,
-    y:          opts.y || 0,
-    height:     opts.height,
-    width:      opts.width,
-    sticky:     opts.sticky,
-    background: opts.background,
-    parent:     null,
-    childs:     [],
+    x:              opts.x || 0,
+    y:              opts.y || 0,
+    height:         opts.height,
+    width:          opts.width,
+    sticky:         opts.sticky,
+    background:     opts.background,
+    parent:         null,
+    childs:         [],
 
-    getX:       getX,
-    getY:       getY,
-    getWidth:   getWidth,
-    getHeight:  getHeight,
+    getX:           getX,
+    getY:           getY,
+    getWidth:       getWidth,
+    getHeight:      getHeight,
 
-    addChild:   addChild,
+    addChild:       addChild,
 
-    draw:       draw
+    draw:           draw,
+    drawBackground: drawBackground,
+    drawChilds:     drawChilds
   }
 
   if (opts.childs) {
@@ -38,7 +40,7 @@ function getX() {
     case 'bottom':     return this.parent.getX()
     case 'horizontal': return this.parent.getX()
   }
-  return this.x
+  return this.x + this.parent.getX()
 }
 
 function getY() {
@@ -50,7 +52,7 @@ function getY() {
     case 'bottom':     return this.parent.getHeight() - this.height
     case 'horizontal': return this.y
   }
-  return this.y
+  return this.y + this.parent.getY()
 }
 
 function getWidth() {
@@ -74,7 +76,7 @@ function getHeight() {
     case 'bottom':     return this.height
     case 'horizontal': return this.height
   }
-  return this.width
+  return this.height
 }
 
 function addChild(child) {
@@ -83,11 +85,20 @@ function addChild(child) {
 }
 
 function draw(ctx) {
-  ctx.beginPath()
-  ctx.fillStyle = this.background
-  ctx.rect(this.getX(), this.getY(), this.getWidth(), this.getHeight())
-  ctx.fill()
+  this.drawBackground(ctx)
+  this.drawChilds(ctx)
+}
 
+function drawBackground(ctx) {
+  if (this.background) {
+    ctx.beginPath()
+    ctx.fillStyle = this.background
+    ctx.rect(this.getX(), this.getY(), this.getWidth(), this.getHeight())
+    ctx.fill()
+  }
+}
+
+function drawChilds(ctx) {
   if (this.childs.length) {
     for (var i =0; i < this.childs.length; i++)
       this.childs[i].draw(ctx)
