@@ -25,6 +25,10 @@ module.exports = function(opts) {
         this.y = container.y
         this.height = container.height
         break
+      case 'vertical':
+        this.y = container.y
+        this.height = container.height
+        break
       case 'top':
         this.x = container.x
         this.y = container.y
@@ -33,6 +37,10 @@ module.exports = function(opts) {
       case 'bottom': 
         this.x = container.x
         this.y = container.height - this.height
+        this.width = container.width
+        break
+      case 'horizontal':
+        this.x = container.x
         this.width = container.width
         break
     }
