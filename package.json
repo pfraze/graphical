@@ -1,0 +1,6 @@
+  {
+  "name": "graphical",
+  "dependencies": {
+    "global": "~4.2.1"
+  }
+}
