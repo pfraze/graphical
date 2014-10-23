@@ -16,7 +16,10 @@ module.exports = function(opts) {
     addChild:       addChild,
 
     draw:           draw,
-    drawChilds:     drawChilds
+    drawChilds:     drawChilds,
+
+    tick:           tick,
+    tickChilds:     tickChilds
   }
 
   if (opts.childs) {
@@ -65,5 +68,16 @@ function drawChilds(ctx) {
   if (this.childs.length) {
     for (var i =0; i < this.childs.length; i++)
       this.childs[i].draw(ctx)
+  }
+}
+
+function tick(dT) {
+  this.drawChilds(dT)
+}
+
+function tickChilds(dT) {
+  if (this.childs.length) {
+    for (var i =0; i < this.childs.length; i++)
+      this.childs[i].tick(dT)
   }
 }

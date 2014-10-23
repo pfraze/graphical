@@ -1,12 +1,19 @@
-var window = require('global/window')
-var layers = require('./layers')
-var panel = require('./com/panel')
-var button = require('./com/button')
-var label = require('./com/label')
-var pos = require('./positioning')
+var window  = require('global/window')
+var layers  = require('./layers')
+var systems = require('./systems')
+var pos     = require('./positioning')
+
+var panel   = require('./com/panel')
+var button  = require('./com/button')
+var label   = require('./com/label')
+var ent     = require('./com/ent')
 
 var CANVAS_WIDTH = window.innerWidth
 var CANVAS_HEIGHT = window.innerHeight
+
+var entSys = systems.create()
+var testEnt = ent({ x: 50, y: 50, childs: [label({ text: 'Test Ent' })] })
+entSys.addChild(testEnt)
 
 var uiLayer = layers.create({ width: CANVAS_WIDTH, height: CANVAS_HEIGHT })
 uiLayer.addChild(panel({ x: 15, y: pos.fromBottom(50), width: pos.fromRight(30), height: 50, background: '#ccc', childs: [
@@ -16,8 +23,21 @@ uiLayer.addChild(panel({ x: 15, y: pos.fromBottom(50), width: pos.fromRight(30),
   ]})
 ]}))
 
+var entLayer = layers.create({ width: CANVAS_WIDTH, height: CANVAS_HEIGHT })
+entLayer.addChild(testEnt)
+
 function draw() {
   uiLayer.draw()
+  entLayer.draw()
   window.requestAnimationFrame(draw)
 }
 draw()
+
+function tick() {
+  entSys.tick()
+  window.requestAnimationFrame(tick)
+}
+tick()
+
+// :DEBUG:
+window.testEnt = testEnt
