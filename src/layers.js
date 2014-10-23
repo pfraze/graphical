@@ -13,7 +13,15 @@ exports.create = function() {
   el.style.zIndex = layers.length
   document.body.appendChild(el)
 
-  var layer = { canvas: el, ctx: el.getContext('2d'), width: CANVAS_WIDTH, height: CANVAS_HEIGHT, draw: drawComponent }
+  var layer = {
+    canvas: el,
+    ctx: el.getContext('2d'),
+    x: 0,
+    y: 0,
+    width: CANVAS_WIDTH,
+    height: CANVAS_HEIGHT,
+    draw: drawComponent
+  }
   layers.push(layer)
   return layer
 }
@@ -28,8 +36,8 @@ function drawComponent(com) {
       this.draw(com[i])
     return
   }
-  
+
   if (!com.draw)
     throw 'Cannot draw component, no .draw function found'
-  com.draw(this)
+  com.draw(this.ctx, this)
 }

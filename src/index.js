@@ -6,7 +6,10 @@ var layer1 = layers.create()
 var panel = require('./com/panel')
 
 var panels = [
-  panel({ height: window.innerHeight / 5, sticky: 'bottom', background: '#ccc' })
+  panel({ height: layer1.height / 4, sticky: 'bottom', background: '#ccc', childs: [
+    panel({ width: layer1.width / 4, sticky: 'left', background: 'red' }),
+    panel({ width: layer1.width / 4, sticky: 'right', background: 'red' }),
+  ]})
 ]
 
 function draw() {
