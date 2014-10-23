@@ -7,51 +7,89 @@ module.exports = function(opts) {
     width:      opts.width,
     sticky:     opts.sticky,
     background: opts.background,
-    childs:     opts.childs || []
+    parent:     null,
+    childs:     [],
+
+    getX:       getX,
+    getY:       getY,
+    getWidth:   getWidth,
+    getHeight:  getHeight,
+
+    addChild:   addChild,
+
+    draw:       draw
   }
 
-  panel.draw = function(ctx, container) {
-    ctx.beginPath()
-    ctx.fillStyle = this.background
-
-    switch (opts.sticky) {
-      case 'left':
-        this.x = container.x
-        this.y = container.y
-        this.height = container.height
-        break
-      case 'right':
-        this.x = container.width - this.width
-        this.y = container.y
-        this.height = container.height
-        break
-      case 'vertical':
-        this.y = container.y
-        this.height = container.height
-        break
-      case 'top':
-        this.x = container.x
-        this.y = container.y
-        this.width = container.width
-        break
-      case 'bottom': 
-        this.x = container.x
-        this.y = container.height - this.height
-        this.width = container.width
-        break
-      case 'horizontal':
-        this.x = container.x
-        this.width = container.width
-        break
-    }
-    ctx.rect(this.x, this.y, this.width, this.height)
-    ctx.fill()
-
-    if (this.childs.length) {
-      for (var i =0; i < this.childs.length; i++)
-        this.childs[i].draw(ctx, this)
+  if (opts.childs) {
+    for (var i=0; i < opts.childs.length; i++) {
+      panel.addChild(opts.childs[i])
     }
   }
 
   return panel
+}
+
+function getX() {
+  switch (this.sticky) {
+    case 'left':       return this.parent.getX()
+    case 'right':      return this.parent.getWidth() - this.width
+    case 'vertical':   return this.x
+    case 'top':        return this.parent.getX()
+    case 'bottom':     return this.parent.getX()
+    case 'horizontal': return this.parent.getX()
+  }
+  return this.x
+}
+
+function getY() {
+  switch (this.sticky) {
+    case 'left':       return this.parent.getY()
+    case 'right':      return this.parent.getY()
+    case 'vertical':   return this.parent.getY()
+    case 'top':        return this.parent.getY()
+    case 'bottom':     return this.parent.getHeight() - this.height
+    case 'horizontal': return this.y
+  }
+  return this.y
+}
+
+function getWidth() {
+  switch (this.sticky) {
+    case 'left':       return this.width
+    case 'right':      return this.width
+    case 'vertical':   return this.width
+    case 'top':        return this.parent.getWidth()
+    case 'bottom':     return this.parent.getWidth()
+    case 'horizontal': return this.parent.getWidth()
+  }
+  return this.width
+}
+
+function getHeight() {
+  switch (this.sticky) {
+    case 'left':       return this.parent.getHeight()
+    case 'right':      return this.parent.getHeight()
+    case 'vertical':   return this.parent.getHeight()
+    case 'top':        return this.height
+    case 'bottom':     return this.height
+    case 'horizontal': return this.height
+  }
+  return this.width
+}
+
+function addChild(child) {
+  child.parent = this
+  this.childs.push(child)
+}
+
+function draw(ctx) {
+  ctx.beginPath()
+  ctx.fillStyle = this.background
+  ctx.rect(this.getX(), this.getY(), this.getWidth(), this.getHeight())
+  ctx.fill()
+
+  if (this.childs.length) {
+    for (var i =0; i < this.childs.length; i++)
+      this.childs[i].draw(ctx)
+  }
 }
