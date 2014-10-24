@@ -31,7 +31,7 @@ function move(x, y, speed) {
   this.moveDest  = new Vector(x, y)
   this.moveSpeed = speed || 1
   this.lastMoveL = Number.POSITIVE_INFINITY
-  this.movePos   = new Vector(this.x, this.y)
-  this.moveDir   = new Vector(x - this.x, y - this.y)
+  this.movePos   = new Vector(this.getX(), this.getY())
+  this.moveDir   = new Vector(x - this.getX(), y - this.getY())
   this.moveDir.normalize()
 }

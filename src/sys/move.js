@@ -14,8 +14,8 @@ function tick(coms, dT) {
       if (!com.moveDir) {
         // initialize a new move
         com.lastMoveL = Number.POSITIVE_INFINITY
-        com.movePos   = new Vector(com.x, com.y)
-        com.moveDir   = new Vector(x - com.x, y - com.y)
+        com.movePos   = new Vector(com.getX(), com.getY())
+        com.moveDir   = new Vector(x - com.getX(), y - com.getY())
         com.moveDir.normalize()
       }
 
