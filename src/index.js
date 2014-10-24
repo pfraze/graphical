@@ -31,8 +31,8 @@ var uiLayer = layers.create({ width: CANVAS_WIDTH, height: CANVAS_HEIGHT })
 // =========
 // Entities
 // =========
-var testEnt = ent({ x: 50, y: 50, width: 20, height: 20, childs: [label({ text: 'Test Ent', baseline: 'bottom' }), nurble({ background: 'blue', width: 20, height: 20 })] })
-var testEnt2 = ent({ x: 150, y: 50, width: 40, height: 30, childs: [label({ text: 'Test Ent 2', baseline: 'bottom' }), stack({ background: 'red', width: 40, height: 30, slices: 4, backgrounds: ['#f00', '#d00', '#b00', '#900'] })] })
+var testEnt = ent({ x: 50, y: 50, width: 20, height: 20, childs: [label({ text: 'Test Ent', baseline: 'bottom' }), nurble({ color: '#fff', width: 20, height: 20 })] })
+var testEnt2 = ent({ x: 150, y: 50, width: 40, height: 30, childs: [label({ text: 'Test Ent 2', baseline: 'bottom' }), stack({ width: 40, height: 30, slices: 4, colors: ['#fff', '#ddd', '#bbb', '#999'] })] })
 entLayer.addChild(world({ width: pos.fromRight(), height: pos.fromBottom(50), background: '#eee', onclick: moveSelected, childs: [testEnt, testEnt2] }))
 function moveSelected(e) {
   if (e.mouseRight && this.selectedEnt)
