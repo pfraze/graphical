@@ -13,7 +13,7 @@ function tick(coms, dT) {
   coms.forEach(function(com) {
     if ('pressedstate' in com && 'onclick' in com) {
       if (com.pressedstate && !com.pressedstateLast) {
-        com.onclick({
+        com.onclick.call(com, {
           mouseX: input.mouseX,
           mouseY: input.mouseY,
           mouseLeft: input.mouseLeft,
