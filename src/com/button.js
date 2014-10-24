@@ -7,6 +7,7 @@ module.exports = function(opts) {
   var button         = panel(opts)
   button.hover       = opts.hover
   button.pressed     = opts.pressed
+  button.onclick     = opts.onclick
 
   if (button.hover)
     button.hoverstate = false

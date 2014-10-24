@@ -17,6 +17,7 @@ var CANVAS_HEIGHT = window.innerHeight
 systems.add(require('./sys/move')())
 systems.add(require('./sys/mousehover')())
 systems.add(require('./sys/mousepress')())
+systems.add(require('./sys/mouseclickevent')())
 // =========
 // Layers
 // =========
@@ -32,10 +33,11 @@ entLayer.addChild(panel({ width: pos.fromRight(), height: pos.fromBottom(50), ba
 // =========
 // UI
 // =========
+var log = console.log.bind(console)
 uiLayer.addChild(panel({ x: 15, y: pos.fromBottom(50), width: pos.fromRight(30), height: 50, background: '#ccc', childs: [
   panel({ x: 20, width: pos.fromRight(40), height: 40, childs: [
-    button({ x: 0,   width: 120, height: 40, background: 'gray', hover: '#aaa', pressed: '#555', childs: [label({ x: 5, text: 'hello world', baseline: 'bottom' })] }),
-    button({ x: 140, width: 120, height: 40, background: 'gray',                pressed: '#555', childs: [label({ x: 5, text: 'hello world 2', baseline: 'bottom' })] }),
+    button({ x: 0,   width: 120, height: 40, background: 'gray', hover: '#aaa', pressed: '#555', onclick: log, childs: [label({ x: 5, text: 'hello world', baseline: 'bottom' })] }),
+    button({ x: 140, width: 120, height: 40, background: 'gray',                pressed: '#555', onclick: log, childs: [label({ x: 5, text: 'hello world 2', baseline: 'bottom' })] }),
   ]})
 ]}))
 // =========
