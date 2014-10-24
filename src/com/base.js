@@ -1,3 +1,5 @@
+var systems = require('../systems')
+
 module.exports = function(opts) {
   opts = opts || {}
   var base = {
@@ -28,6 +30,7 @@ module.exports = function(opts) {
     }
   }
 
+  systems.addCom(base)
   return base
 }
 

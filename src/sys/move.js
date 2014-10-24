@@ -1,0 +1,42 @@
+var Vector = require('victor')
+
+module.exports = function(opts) {
+  opts = opts || {}
+  var move = {
+    tick: tick
+  }
+  return move
+}
+
+function tick(com, dT) {
+  if (com.moveDest) {
+    if (!com.moveDir) {
+      // initialize a new move
+      this.lastMoveL = Number.POSITIVE_INFINITY
+      this.movePos   = new Vector(this.x, this.y)
+      this.moveDir   = new Vector(x - this.x, y - this.y)
+      this.moveDir.normalize()
+    }
+
+    // calculate new position
+    var dX = com.moveDir.x * com.moveSpeed * dT
+    var dY = com.moveDir.y * com.moveSpeed * dT
+    com.movePos.x += dX
+    com.movePos.y += dY
+
+    // check if we've arived
+    var L = com.moveDest.distanceSq(com.movePos)
+    if (L > com.lastMoveL) {
+      com.x = com.moveDest.x|0
+      com.y = com.moveDest.y|0
+      com.moveDest = undefined
+      com.lastMoveL = undefined
+      com.movePos = undefined
+      com.moveDir = undefined
+    } else {
+      com.lastMoveL = L
+      com.x = com.movePos.x|0
+      com.y = com.movePos.y|0
+    }   
+  }
+}

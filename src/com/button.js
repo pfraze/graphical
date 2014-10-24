@@ -8,6 +8,11 @@ module.exports = function(opts) {
   button.hover       = opts.hover
   button.pressed     = opts.pressed
 
+  if (button.hover)
+    button.hoverstate = false
+  button.pressedstate = false
+  button.isInside     = isInside
+
   button.draw        = draw
   button.drawHover   = drawHover
   button.drawPressed = drawPressed
@@ -16,13 +21,11 @@ module.exports = function(opts) {
 }
 
 function draw(ctx) {
-  if (inbounds(input.mouseX, input.mouseY, this.getX(), this.getY(), this.getWidth(), this.getHeight())) {
-    if (input.mouseLeft) {
-      this.drawPressed(ctx)
-    } else {
-      this.drawHover(ctx)
-    }
-  } else
+  if (this.pressedstate)
+    this.drawPressed(ctx)
+  else if (this.hoverstate)
+    this.drawHover(ctx)
+  else
     this.drawBackground(ctx)
   this.drawChilds(ctx)
 }
@@ -45,7 +48,11 @@ function drawPressed(ctx) {
   }
 }
 
-function inbounds(xT, yT, x, y, width, height) {
+function isInside(xT, yT) {
+  var x = this.getX()
+    , y = this.getY()
+    , width = this.getWidth()
+    , height = this.getHeight()
   if (xT < x) return false
   if (yT < y) return false
   if (xT > x + width) return false
