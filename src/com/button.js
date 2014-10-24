@@ -12,7 +12,6 @@ module.exports = function(opts) {
   if (button.hover)
     button.hoverstate = false
   button.pressedstate = false
-  button.isInside     = isInside
 
   button.draw        = draw
   button.drawHover   = drawHover
@@ -47,16 +46,4 @@ function drawPressed(ctx) {
     ctx.rect(this.getX(), this.getY(), this.getWidth(), this.getHeight())
     ctx.fill()
   }
-}
-
-function isInside(xT, yT) {
-  var x = this.getX()
-    , y = this.getY()
-    , width = this.getWidth()
-    , height = this.getHeight()
-  if (xT < x) return false
-  if (yT < y) return false
-  if (xT > x + width) return false
-  if (yT > y + height) return false
-  return true
 }

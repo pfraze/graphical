@@ -4,12 +4,23 @@ var Vector = require('victor')
 module.exports = function(opts) {
   opts = opts || {}
   var ent   = base(opts)
+  
+  ent.isent = true
+  ent.pressedstate = false
+  ent.selectedstate = false
+
   ent.draw  = draw
   ent.move  = move
   return ent
 }
 
 function draw(ctx) {
+  ctx.beginPath()
+  ctx.strokeStyle = 'black'
+  ctx.rect(this.getX(), this.getY(), this.getWidth(), this.getHeight())
+  ctx.stroke()
+  ctx.closePath()
+
   this.drawChilds(ctx)
 }
 

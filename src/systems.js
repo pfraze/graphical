@@ -20,10 +20,8 @@ exports.addCom = function(com) {
 exports.tick = function() {
   var T = Date.now()
   var dT = T - (this.lastT||T)
-  for (var i=0; i < components.length; i++) {
-    for (var j=0; j < systems.length; j++) {
-      systems[j].tick(components[i], dT)
-    }
+  for (var i=0; i < systems.length; i++) {
+    systems[i].tick(components, dT)
   }
   this.lastT = T
 }

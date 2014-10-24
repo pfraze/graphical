@@ -1,8 +1,11 @@
+var cuid = require('cuid')
 var systems = require('../systems')
+var util = require('../util')
 
 module.exports = function(opts) {
   opts = opts || {}
   var base = {
+    uid:            cuid(),
     x:              opts.x || 0,
     y:              opts.y || 0,
     height:         opts.height || 0,
@@ -14,6 +17,7 @@ module.exports = function(opts) {
     getY:           getY,
     getWidth:       getWidth,
     getHeight:      getHeight,
+    isInside:       isInside,
 
     addChild:       addChild,
 
@@ -56,6 +60,10 @@ function getHeight() {
   if (typeof this.height == 'function')
     return this.height.call(this)
   return this.height
+}
+
+function isInside(xT, yT) {
+  return util.isInside(xT, yT, this.getX(), this.getY(), this.getWidth(), this.getHeight())
 }
 
 function addChild(child) {

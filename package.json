@@ -1,6 +1,7 @@
   {
   "name": "graphical",
   "dependencies": {
+    "cuid": "~1.2.4",
     "global": "~4.2.1",
     "victor": "~0.2.6"
   }

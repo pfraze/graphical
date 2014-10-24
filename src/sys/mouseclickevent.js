@@ -9,17 +9,18 @@ module.exports = function(opts) {
   return mouseclickevent
 }
 
-function tick(com, dT) {
-  if ('pressedstate' in com && 'onclick' in com) {
-    if (com.pressedstate && !com.pressedstateLast) {
-      com.onclick({
-        mouseX: input.mouseX,
-        mouseY: input.mouseY,
-        mouseLeft: input.mouseLeft,
-        mouseMiddle: input.mouseMiddle,
-        mouseRight: input.mouseRight
-      })
+function tick(coms, dT) {
+  coms.forEach(function(com) {
+    if ('pressedstate' in com && 'onclick' in com) {
+      if (com.pressedstate && !com.pressedstateLast) {
+        com.onclick({
+          mouseX: input.mouseX,
+          mouseY: input.mouseY,
+          mouseLeft: input.mouseLeft,
+          mouseMiddle: input.mouseMiddle,
+          mouseRight: input.mouseRight
+        })
+      }
     }
-    com.pressedstateLast = com.pressedstate
-  }
+  })
 }

@@ -9,16 +9,19 @@ module.exports = function(opts) {
   return mousehover
 }
 
-function tick(com, dT) {
-  if ('hoverstate' in com && com.isInside) {
-    if (!com.hoverstate) {
-      if (com.isInside(input.mouseX, input.mouseY)) {
-        com.hoverstate = true
-      }
-    } else {
-      if (!com.isInside(input.mouseX, input.mouseY)) {
-        com.hoverstate = false
+function tick(coms, dT) {
+  coms.forEach(function(com) {
+    if ('hoverstate' in com && com.isInside) {
+      com.hoverstateLast = com.hoverstate
+      if (!com.hoverstate) {
+        if (com.isInside(input.mouseX, input.mouseY)) {
+          com.hoverstate = true
+        }
+      } else {
+        if (!com.isInside(input.mouseX, input.mouseY)) {
+          com.hoverstate = false
+        }
       }
     }
-  }
+  })
 }
