@@ -13,11 +13,12 @@ function tick(coms, dT) {
   coms.forEach(function(com) {
     if ('pressedstate' in com && com.isInside) {
       com.pressedstateLast = com.pressedstate
-      if (input.mouseLeft && !com.pressedstate) {
+      var mouseDown = input.mouseLeft || input.mouseMiddle || input.mouseRight
+      if (mouseDown && !com.pressedstate) {
         if (com.isInside(input.mouseX, input.mouseY)) {
           com.pressedstate = true
         }
-      } else if (!input.mouseLeft && com.pressedstate) {
+      } else if (!mouseDown && com.pressedstate) {
         com.pressedstate = false
       }
     }
