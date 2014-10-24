@@ -6,6 +6,11 @@ exports.mouseLeft = false
 exports.mouseMiddle = false
 exports.mouseRight = false
 
+document.addEventListener('contextmenu', function(e){
+  if (e.target.tagName == 'CANVAS')
+    e.preventDefault()
+})
+
 document.addEventListener('mousemove', function(e){ 
   exports.mouseX = e.clientX || e.pageX
   exports.mouseY = e.clientY || e.pageY 
