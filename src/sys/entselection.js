@@ -19,7 +19,7 @@ function tick(coms, dT) {
     if (com.isent && 'pressedstate' in com && 'selectedstate' in com) {
       com.selectedstateLast = com.selectedstate
       // recently pressed?
-      if (!com.selectedstate && com.pressedstate && !com.pressedstateLast) {
+      if (!com.selectedstate && com.pressedstate === 'left' && !com.pressedstateLast) {
         if (self.curEnt)
           self.curEnt.selectedstate = false
         self.curEnt = com

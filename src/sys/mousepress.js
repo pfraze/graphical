@@ -13,12 +13,19 @@ function tick(coms, dT) {
   coms.forEach(function(com) {
     if ('pressedstate' in com && com.isInside) {
       com.pressedstateLast = com.pressedstate
-      var mouseDown = input.mouseLeft || input.mouseMiddle || input.mouseRight
-      if (mouseDown && !com.pressedstate) {
+
+      // construct pressed state
+      var pressedstate = ''
+      if (input.mouseLeft)   pressedstate += 'left '
+      if (input.mouseMiddle) pressedstate += 'middle '
+      if (input.mouseRight)  pressedstate += 'right '
+
+      // update component
+      if (pressedstate && !com.pressedstate) {
         if (com.isInside(input.mouseX, input.mouseY)) {
-          com.pressedstate = true
+          com.pressedstate = pressedstate.trim()
         }
-      } else if (!mouseDown && com.pressedstate) {
+      } else if (!pressedstate && com.pressedstate) {
         com.pressedstate = false
       }
     }
