@@ -8,6 +8,7 @@ var button  = require('./com/button')
 var label   = require('./com/label')
 var ent     = require('./com/ent')
 var world   = require('./com/world')
+var nurble  = require('./com/graphic/nurble')
 
 var CANVAS_WIDTH = window.innerWidth
 var CANVAS_HEIGHT = window.innerHeight
@@ -15,6 +16,7 @@ var CANVAS_HEIGHT = window.innerHeight
 // =========
 // Systems
 // =========
+systems.add(require('./sys/lerp')())
 systems.add(require('./sys/move')())
 systems.add(require('./sys/mousehover')())
 systems.add(require('./sys/mousepress')())
@@ -28,8 +30,8 @@ var uiLayer = layers.create({ width: CANVAS_WIDTH, height: CANVAS_HEIGHT })
 // =========
 // Entities
 // =========
-var testEnt = ent({ x: 50, y: 50, width: 50, height: 50, childs: [label({ text: 'Test Ent' })] })
-var testEnt2 = ent({ x: 150, y: 50, width: 50, height: 50, childs: [label({ text: 'Test Ent 2' })] })
+var testEnt = ent({ x: 50, y: 50, width: 20, height: 20, childs: [label({ text: 'Test Ent', baseline: 'bottom' }), nurble({ background: 'blue', width: 20, height: 20 })] })
+var testEnt2 = ent({ x: 150, y: 50, width: 20, height: 20, childs: [label({ text: 'Test Ent 2', baseline: 'bottom' }), nurble({ background: 'red', width: 20, height: 20 })] })
 entLayer.addChild(world({ width: pos.fromRight(), height: pos.fromBottom(50), background: '#fff', onclick: moveSelected, childs: [testEnt, testEnt2] }))
 function moveSelected(e) {
   if (e.mouseRight && this.selectedEnt)

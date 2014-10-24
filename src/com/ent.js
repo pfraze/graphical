@@ -15,11 +15,13 @@ module.exports = function(opts) {
 }
 
 function draw(ctx) {
-  ctx.beginPath()
-  ctx.strokeStyle = 'black'
-  ctx.rect(this.getX(), this.getY(), this.getWidth(), this.getHeight())
-  ctx.stroke()
-  ctx.closePath()
+  if (this.selectedstate) {
+    ctx.beginPath()
+    ctx.strokeStyle = 'black'
+    ctx.rect(this.getX(), this.getY(), this.getWidth(), this.getHeight())
+    ctx.stroke()
+    ctx.closePath()
+  }
 
   this.drawChilds(ctx)
 }
