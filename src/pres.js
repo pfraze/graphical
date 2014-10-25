@@ -8,8 +8,10 @@ var button  = require('./com/button')
 var label   = require('./com/label')
 var ent     = require('./com/ent')
 var world   = require('./com/world')
+
 var nurble  = require('./com/graphic/nurble')
 var stack   = require('./com/graphic/stack')
+var circle  = require('./com/graphic/circle')
 
 var CANVAS_WIDTH = window.innerWidth
 var CANVAS_HEIGHT = window.innerHeight
@@ -33,17 +35,9 @@ var uiLayer = layers.create({ width: CANVAS_WIDTH, height: CANVAS_HEIGHT })
 // =========
 
 entLayer.addChild(world({ width: pos.fromRight(), height: pos.fromBottom(50), background: '#eee', onclick: moveSelected, childs: [
-  // structures
-  ent({ x: 50, y: 50, width: 40, height: 30, childs: [label({ text: 'Your Feed', baseline: 'bottom' }), stack({ width: 40, height: 30, slices: 4, colors: ['#fff', '#ddd', '#bbb', '#999'] })] }),
-  ent({ x: 50, y: 150, width: 40, height: 30, childs: [label({ text: 'Your Contacts', baseline: 'bottom' }), stack({ width: 40, height: 30, slices: 4, colors: ['#fff', '#ddd', '#bbb', '#999'] })] }),
-  world({ x: 300, y: 50, width: pos.fromRight(350), height: 100, background: '#ccc', childs: [
-    label({ text: 'WAN', baseline: 'bottom' }),
-    ent({ x: 30, y: pos.fromCenterY(), width: 40, height: 30, childs: [label({ text: 'mypub.com', baseline: 'bottom' }), stack({ width: 40, height: 30, slices: 4, colors: ['#fff', '#ddd', '#bbb', '#999'] })] }),
-    ent({ x: 130, y: pos.fromCenterY(), width: 40, height: 30, childs: [label({ text: 'foo.com', baseline: 'bottom' }), stack({ width: 40, height: 30, slices: 4, colors: ['#fff', '#ddd', '#bbb', '#999'] })] })
-  ]}),
-  
-  // angels
-  ent({ x: 350, y: 400, width: 20, height: 20, childs: [label({ text: 'Bob', baseline: 'bottom' }), nurble({ color: '#fff', width: 20, height: 20 })] })
+  ent({ x: 50,  y: 50, width: 20, height: 20, childs: [label({ text: 'Nurble', baseline: 'bottom' }), nurble({ color: '#fff', width: 20, height: 20 })] }),
+  ent({ x: 150, y: 50, width: 40, height: 30, childs: [label({ text: 'Stack', baseline: 'bottom' }), stack({ width: 40, height: 30, slices: 4, colors: ['#fff', '#ddd', '#bbb', '#999'] })] }),
+  ent({ x: 250, y: 50, width: 20, height: 20, childs: [label({ text: 'Circle', baseline: 'bottom' }), circle({ width: 20, height: 20 })] }),
 ]}))
 function moveSelected(e) {
   if (e.mouseRight && this.selectedEnt)
