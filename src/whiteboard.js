@@ -13,7 +13,8 @@ var nurble  = require('./com/graphic/nurble')
 var stack   = require('./com/graphic/stack')
 var circle  = require('./com/graphic/circle')
 
-var cyclone   = require('./com/complex/cyclone')
+var cyclone = require('./com/complex/cyclone')
+var flock   = require('./com/complex/flock')
 
 var CANVAS_WIDTH = window.innerWidth
 var CANVAS_HEIGHT = window.innerHeight
@@ -52,6 +53,17 @@ entLayer.addChild(world({ width: pos.fromRight(), height: pos.fromBottom(50), ba
       circle({ width: 20, height: 20 })
     ]})
   ]}),
+  ent({ x: 150, y: 150, width: 20, height: 20, childs: [
+    label({ text: 'Flock', baseline: 'bottom' }),
+    flock({ width: 20, height: 20, childs: [
+      nurble({ width: 20, height: 20 }),
+      nurble({ width: 20, height: 20 }),
+      nurble({ width: 20, height: 20 }),
+      nurble({ width: 20, height: 20 }),
+      nurble({ width: 20, height: 20 }),
+      nurble({ width: 20, height: 20 })
+    ]})
+  ]})
 ]}))
 function moveSelected(e) {
   if (e.mouseRight && this.selectedEnt)
