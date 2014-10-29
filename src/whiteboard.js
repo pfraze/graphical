@@ -13,6 +13,8 @@ var nurble  = require('./com/graphic/nurble')
 var stack   = require('./com/graphic/stack')
 var circle  = require('./com/graphic/circle')
 
+var cyclone   = require('./com/complex/cyclone')
+
 var CANVAS_WIDTH = window.innerWidth
 var CANVAS_HEIGHT = window.innerHeight
 
@@ -38,6 +40,18 @@ entLayer.addChild(world({ width: pos.fromRight(), height: pos.fromBottom(50), ba
   ent({ x: 50,  y: 50, width: 20, height: 20, childs: [label({ text: 'Nurble', baseline: 'bottom' }), nurble({ color: '#fff', width: 20, height: 20 })] }),
   ent({ x: 150, y: 50, width: 40, height: 30, childs: [label({ text: 'Stack', baseline: 'bottom' }), stack({ width: 40, height: 30, slices: 4, colors: ['#fff', '#ddd', '#bbb', '#999'] })] }),
   ent({ x: 250, y: 50, width: 20, height: 20, childs: [label({ text: 'Circle', baseline: 'bottom' }), circle({ width: 20, height: 20 })] }),
+
+  ent({ x: 50, y: 150, width: 20, height: 20, childs: [
+    label({ text: 'Cyclone', baseline: 'bottom' }),
+    cyclone({ width: 20, height: 20, childs: [
+      nurble({ width: 20, height: 20 }),
+      circle({ width: 20, height: 20 }),
+      nurble({ width: 20, height: 20 }),
+      circle({ width: 20, height: 20 }),
+      nurble({ width: 20, height: 20 }),
+      circle({ width: 20, height: 20 })
+    ]})
+  ]}),
 ]}))
 function moveSelected(e) {
   if (e.mouseRight && this.selectedEnt)

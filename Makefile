@@ -1,4 +1,5 @@
-pres: src/*
-	browserify -o pres.js src/pres.js
+whiteboard: src/*
+	browserify -o whiteboard.js src/whiteboard.js
 index: src/*
-	browserify -o build.js src/index.js
+	browserify -o index.js src/index.js
+all: whiteboard index
