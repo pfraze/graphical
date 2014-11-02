@@ -2,6 +2,7 @@
   "name": "graphical",
   "dependencies": {
     "cuid": "~1.2.4",
+    "browserify": "~6.2.0",
     "global": "~4.2.1",
     "victor": "~0.2.6"
   }
